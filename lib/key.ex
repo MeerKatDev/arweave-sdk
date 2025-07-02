@@ -1,6 +1,9 @@
 defmodule Arweave.Key do
   def load_jwk(path) do
-    jwk = path |> File.read!() |> Jason.decode!()
+    jwk =
+      path
+      |> File.read!()
+      |> Jason.decode!()
 
     # Decode base64url values
     decode = &Base.url_decode64!(&1, padding: false)
@@ -19,6 +22,6 @@ defmodule Arweave.Key do
   end
 
   defp to_private_key(%{n: n, e: e, d: d, p: p, q: q, dp: dp, dq: dq, qi: qi}) do
-    {:RSAPrivateKey, :'two-prime', n, e, d, p, q, dp, dq, qi, :asn1_NOVALUE}
+    {:RSAPrivateKey, :"two-prime", n, e, d, p, q, dp, dq, qi, :asn1_NOVALUE}
   end
 end

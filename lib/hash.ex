@@ -1,5 +1,7 @@
 defmodule Arweave.Hash do
-  @moduledoc false
+  @moduledoc """
+  Used by arweave to hash stuff
+  """
 
   def deep_hash(data) when is_binary(data) do
     prefix = encode_length_prefixed("blob", data)
@@ -14,8 +16,8 @@ defmodule Arweave.Hash do
 
   defp encode_length_prefixed(label, data) do
     <<byte_size(label)::unsigned-big-integer-size(64)>> <>
-    label <>
-    <<byte_size(data)::unsigned-big-integer-size(64)>> <>
-    data
+      label <>
+      <<byte_size(data)::unsigned-big-integer-size(64)>> <>
+      data
   end
 end
